@@ -2,6 +2,7 @@ package osu.carlift;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -26,7 +27,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginFragment extends Fragment {
+public class LoginActivity extends AppCompatActivity {
     private String userName;
     private String passWord;
     private EditText mUserNameField;
@@ -36,14 +37,9 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
         userName=new String();passWord=new String();
-
-    }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstancestate)
-    {
-        View v=inflater.inflate(R.layout.fragment_login,container,false);
-        mUserNameField=(EditText)v.findViewById(R.id.user_name_edit);
+        mUserNameField=(EditText)findViewById(R.id.user_name_edit);
         mUserNameField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -61,7 +57,7 @@ public class LoginFragment extends Fragment {
 
             }
         });
-        mPassWordField=(EditText)v.findViewById(R.id.pass_word_edit);
+        mPassWordField=(EditText)findViewById(R.id.pass_word_edit);
         mPassWordField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -80,7 +76,7 @@ public class LoginFragment extends Fragment {
 
             }
         });
-        mConfirmLogin=(Button)v.findViewById(R.id.confirm_login_button);
+        mConfirmLogin=(Button)findViewById(R.id.confirm_login_button);
         mConfirmLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +84,7 @@ public class LoginFragment extends Fragment {
 
             }
         });
-        return v;
+
     }
     public   void LoginRequest(final String accountNumber, final String password) {
         //请求地址
@@ -97,7 +93,7 @@ public class LoginFragment extends Fragment {
         String tag = "LoginServlet";    //注②
 
         //取得请求队列
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         //防止重复请求，所以先取消tag标识的请求队列
         requestQueue.cancelAll(tag);
@@ -112,14 +108,14 @@ public class LoginFragment extends Fragment {
                             String result = jsonObject.getString("Result");  //注④
                             if (result.equals("success")) {  //注⑤
                                 //做自己的登录成功操作，如页面跳转
-                                Toast.makeText(getActivity(),R.string.login_sucess,Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this,R.string.login_sucess,Toast.LENGTH_LONG).show();
                             } else {
                                 //做自己的登录失败操作，如Toast提示
-                                Toast.makeText(getActivity(),R.string.login_fail,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this,R.string.login_fail,Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
-                            Toast.makeText(getActivity(),R.string.connection_failed,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,R.string.connection_failed,Toast.LENGTH_SHORT).show();
                             Log.e("TAG", e.getMessage(), e);
                         }
                     }

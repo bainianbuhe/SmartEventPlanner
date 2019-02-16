@@ -1,5 +1,7 @@
 package osu.carlift;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -35,16 +37,17 @@ public class Welcome extends AppCompatActivity {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm = getSupportFragmentManager();
-                Fragment fragment = fm.findFragmentById(R.id.fragment_login);
-                if (fragment == null) {
-                    fragment = new LoginFragment();
-                    fm.beginTransaction()
-                            .add(R.id.fragment_login, fragment)
-                            .commit();
+                Intent intent=new Intent(Welcome.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
-                }
-
+        mSignupButton=findViewById(R.id.signup_button);
+        mSignupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Welcome.this,SignupActivity.class);
+                startActivity(intent);
             }
         });
 
