@@ -1,6 +1,7 @@
 package osu.carlift;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -117,6 +118,8 @@ public class SignupActivity extends AppCompatActivity {
                             if (result.equals("success")) {  //注⑤
                                 //做自己的登录成功操作，如页面跳转
                                 Toast.makeText(SignupActivity.this,R.string.signup_sucess,Toast.LENGTH_LONG).show();
+                                Intent intent=new Intent(SignupActivity.this,LoginActivity.class);
+                                startActivity(intent);
                             } else {
                                 //做自己的登录失败操作，如Toast提示
                                 Toast.makeText(SignupActivity.this,R.string.signup_fail,Toast.LENGTH_LONG).show();
@@ -137,8 +140,8 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("AccountNumber", accountNumber);  //注⑥
-                params.put("Password", password);
+                params.put("userName", userName);  //注⑥
+                params.put("passWord", password);
                 return params;
             }
         };
