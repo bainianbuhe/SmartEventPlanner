@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="osu.carlift">
+    package="osu.smartPlanner">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,15 +16,15 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".Welcome">
+        <activity android:name="osu.smartPlanner.Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name="osu.smartPlanner.LoginActivity" />
+        <activity android:name="osu.smartPlanner.SignupActivity"></activity>
     </application>
 
 </manifest>

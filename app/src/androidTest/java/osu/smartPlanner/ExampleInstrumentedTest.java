@@ -1,4 +1,4 @@
-package osu.carlift;
+package osu.smartPlanner;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

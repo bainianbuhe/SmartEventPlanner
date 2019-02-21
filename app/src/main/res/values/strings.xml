@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Carlift</string>
+    <string name="app_name">Smart Planner</string>
     <string name="login_sucess">Login Success!</string>
     <string name="login_fail">Login Failed!</string>
     <string name="connection_failed">Connection Failed!</string>

@@ -1,4 +1,4 @@
-package osu.carlift;
+package osu.smartPlanner;
 
 import org.junit.Test;
 
