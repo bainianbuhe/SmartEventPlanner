@@ -2,6 +2,7 @@ package osu.smartPlanner;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private String passWord;
     private EditText mUserNameField;
     private EditText mPassWordField;
-    private Button mConfirmLogin;
+    private CardView mConfirmLogin;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -73,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-        mConfirmLogin=(Button)findViewById(R.id.confirm_login_button);
+        mConfirmLogin=findViewById(R.id.confirm_login_button);
         mConfirmLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -3,6 +3,7 @@ package osu.smartPlanner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
 
 import android.text.Editable;
@@ -31,7 +32,7 @@ public class SignupActivity extends AppCompatActivity {
     private String passWord;
     private EditText mUserNameField;
     private EditText mPassWordField;
-    private Button mConfirmSignup;
+    private CardView mConfirmSignup;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -75,7 +76,7 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
-        mConfirmSignup=(Button)findViewById(R.id.confirm_sign_up_button);
+        mConfirmSignup=findViewById(R.id.confirm_sign_up_button);
         mConfirmSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
