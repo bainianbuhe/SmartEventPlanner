@@ -89,8 +89,8 @@ public class SignupActivity extends AppCompatActivity {
 
     public   void SignupRequest(final String accountNumber, final String password) {
         //请求地址
-        String url = "http://www.hygg.com.ngrok.io/Carlift_Hanyin/SignupServlet";
-        String tag = "SignupServlet";    //注②
+        String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/SignupServlet";
+        String tag = "SignupServlet"+userName;    //注②
 
         //取得请求队列
         RequestQueue requestQueue = Volley.newRequestQueue(SignupActivity.this);
