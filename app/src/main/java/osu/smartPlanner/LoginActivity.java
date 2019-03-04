@@ -115,7 +115,14 @@ public class LoginActivity extends AppCompatActivity {
                                 event.setTime("12.23");
                                 event.setTitle("title");
                                 event.setUserName("hygg");
-                                UserDAO.addEvent(event,LoginActivity.this);
+                                //UserDAO.addEvent(event,LoginActivity.this);
+                                event.setTime("36.12");
+                                UserDAO.updateEvent("hygg","title",event,LoginActivity.this);
+                                UserDAO.deleteEvent("hygg","title",LoginActivity.this);
+                                event.setLocation("tianshangrenjian");
+                                //UserDAO.addEvent(event,LoginActivity.this);
+
+
                             } else {
                                 //做自己的登录失败操作，如Toast提示
                                 Toast.makeText(LoginActivity.this,R.string.login_fail,Toast.LENGTH_LONG).show();
