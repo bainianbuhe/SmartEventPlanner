@@ -107,6 +107,15 @@ public class LoginActivity extends AppCompatActivity {
                             if (result.equals("success")) {  //注⑤
                                 //做自己的登录成功操作，如页面跳转
                                 Toast.makeText(LoginActivity.this,R.string.login_sucess,Toast.LENGTH_LONG).show();
+                                Event event=new Event();
+                                event.setContacts("6142222222");
+                                event.setDescription("descr");
+                                event.setLocation("location");
+                                event.setPriority("important");
+                                event.setTime("12.23");
+                                event.setTitle("title");
+                                event.setUserName("hygg");
+                                UserDAO.addEvent(event,LoginActivity.this);
                             } else {
                                 //做自己的登录失败操作，如Toast提示
                                 Toast.makeText(LoginActivity.this,R.string.login_fail,Toast.LENGTH_LONG).show();
