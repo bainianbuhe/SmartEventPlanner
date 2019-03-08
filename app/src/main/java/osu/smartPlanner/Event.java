@@ -13,8 +13,8 @@ public class Event {
         this.contacts = contacts;
     }
 
-    public void setDescription(String decription) {
-        this.description = decription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setLocation(String location) {

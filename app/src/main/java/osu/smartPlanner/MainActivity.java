@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("TAG1","yao lai le");
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             username = (String) savedInstanceState.getSerializable("USERNAME");
         }
+
         confirmNewEvent = findViewById(R.id.newEventButton);
         confirmNewEvent.setOnClickListener(new View.OnClickListener() {
             @Override

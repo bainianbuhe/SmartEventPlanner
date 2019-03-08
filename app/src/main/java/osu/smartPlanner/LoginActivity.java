@@ -111,7 +111,6 @@ public class LoginActivity extends AppCompatActivity {
 //                                intentToEvent.putExtra("USERNAME", userName);
                                 Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
                                 intentToMain.putExtra("USERNAME", userName);
-                                Log.d("TAG1", "login");
                                 startActivity(intentToMain);
 //                                Event event = new Event();
 //                                event.setContacts("6142222222");
