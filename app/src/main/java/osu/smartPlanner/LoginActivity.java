@@ -1,5 +1,6 @@
 package osu.smartPlanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         userName=new String();passWord=new String();
-        mUserNameField=(EditText)findViewById(R.id.user_name_edit);
+        mUserNameField = findViewById(R.id.user_name_edit);
         mUserNameField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -55,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-        mPassWordField=(EditText)findViewById(R.id.pass_word_edit);
+        mPassWordField = findViewById(R.id.pass_word_edit);
         mPassWordField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -79,12 +80,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LoginRequest(userName,passWord);
-
             }
         });
 
     }
-    public   void LoginRequest(final String accountNumber, final String password) {
+    public void LoginRequest(final String accountNumber, final String password) {
         //请求地址
         String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/LoginServlet";
         //String url = "http://127.0.0.1:4040/Carlift_Hanyin/LoginServlet";  //注①
@@ -107,22 +107,26 @@ public class LoginActivity extends AppCompatActivity {
                             if (result.equals("success")) {  //注⑤
                                 //做自己的登录成功操作，如页面跳转
                                 Toast.makeText(LoginActivity.this,R.string.login_sucess,Toast.LENGTH_LONG).show();
-                                Event event=new Event();
-                                event.setContacts("6142222222");
-                                event.setDescription("descr");
-                                event.setLocation("location");
-                                event.setPriority("important");
-                                event.setTime("12.23");
-                                event.setTitle("title");
-                                event.setUserName("hygg");
-                                //UserDAO.addEvent(event,LoginActivity.this);
-                                event.setTime("36.12");
-                                UserDAO.updateEvent("hygg","title",event,LoginActivity.this);
-                                UserDAO.deleteEvent("hygg","title",LoginActivity.this);
-                                event.setLocation("tianshangrenjian");
-                                //UserDAO.addEvent(event,LoginActivity.this);
-
-
+//                                Intent intentToEvent = new Intent(LoginActivity.this, EventActivity.class);
+//                                intentToEvent.putExtra("USERNAME", userName);
+                                Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
+                                intentToMain.putExtra("USERNAME", userName);
+                                Log.d("TAG1", "login");
+                                startActivity(intentToMain);
+//                                Event event = new Event();
+//                                event.setContacts("6142222222");
+//                                event.setDescription("descr");
+//                                event.setLocation("location");
+//                                event.setPriority("important");
+//                                event.setTime("12.23");
+//                                event.setTitle("title");
+//                                event.setUserName("hygg");
+//                                //UserDAO.addEvent(event,LoginActivity.this);
+//                                event.setTime("36.12");
+//                                UserDAO.updateEvent("hygg","title",event,LoginActivity.this);
+//                                UserDAO.deleteEvent("hygg","title",LoginActivity.this);
+//                                event.setLocation("tianshangrenjian");
+//                                //UserDAO.addEvent(event,LoginActivity.this);
                             } else {
                                 //做自己的登录失败操作，如Toast提示
                                 Toast.makeText(LoginActivity.this,R.string.login_fail,Toast.LENGTH_LONG).show();

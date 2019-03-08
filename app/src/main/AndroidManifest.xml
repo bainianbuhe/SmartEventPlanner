@@ -25,6 +25,8 @@
         </activity>
         <activity android:name="osu.smartPlanner.LoginActivity" />
         <activity android:name="osu.smartPlanner.SignupActivity"></activity>
+        <activity android:name="osu.smartPlanner.MainActivity"></activity>
+        <activity android:name="osu.smartPlanner.EventActivity"></activity>
     </application>
 
 </manifest>

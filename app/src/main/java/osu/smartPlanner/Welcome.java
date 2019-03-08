@@ -32,8 +32,5 @@ public class Welcome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
-
 }
