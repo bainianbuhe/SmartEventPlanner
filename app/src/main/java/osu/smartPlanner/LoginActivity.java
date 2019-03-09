@@ -109,9 +109,17 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this,R.string.login_sucess,Toast.LENGTH_LONG).show();
 //                                Intent intentToEvent = new Intent(LoginActivity.this, EventActivity.class);
 //                                intentToEvent.putExtra("USERNAME", userName);
-                                Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
-                                intentToMain.putExtra("USERNAME", userName);
-                                startActivity(intentToMain);
+
+                                //Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
+                                //intentToMain.putExtra("USERNAME", userName);
+                                //Log.d("TAG1", "login");
+                                //startActivity(intentToMain);
+                                Intent intent=new Intent(LoginActivity.this,EventListActivity.class);
+                                startActivity(intent);
+                                //Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
+                                //intentToMain.putExtra("USERNAME", userName);
+                                //startActivity(intentToMain);
+
 //                                Event event = new Event();
 //                                event.setContacts("6142222222");
 //                                event.setDescription("descr");

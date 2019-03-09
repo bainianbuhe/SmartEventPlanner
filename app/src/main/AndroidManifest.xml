@@ -16,17 +16,20 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name="osu.smartPlanner.Welcome">
+        <activity android:name=".Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="osu.smartPlanner.LoginActivity" />
-        <activity android:name="osu.smartPlanner.SignupActivity"></activity>
-        <activity android:name="osu.smartPlanner.MainActivity"></activity>
-        <activity android:name="osu.smartPlanner.EventActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".EventActivity" />
+        <activity android:name=".SingleFragmentActivity" />
+        <activity android:name=".EventListActivity" />
+        <activity android:name=".EventListFragment"></activity>
     </application>
 
 </manifest>
