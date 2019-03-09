@@ -39,9 +39,9 @@ public class EventListFragment extends Fragment {
     private RecyclerView mRequestRecyclerView;
     private EventAdapter mAdapter;
     private  String userName;
-    private final String EXTRA_USERNAME="user_name";
-    public void setUserName(String username)
-    {userName=username;}
+    public void setUserName(String username) {
+        userName = username;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
     {
@@ -148,8 +148,9 @@ public class EventListFragment extends Fragment {
                         try {
                             JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");
                             JSONArray events = jsonObject.getJSONArray("Events");
-                            Log.e("TAG", "in event list "+events.length()+"requests");
-                            Log.e("TAG", "length"+events.length());
+                            Log.e("TAGBOSS", "kuokuoni");
+                            Log.e("TAGBOSS", "in event list "+events.length()+"requests");
+                            Log.e("TAGBOSS", "length"+events.length());
                             for (int i = 0; i < events.length(); i++) {
                                 JSONObject event = events.getJSONObject(i);    //注②
                                 String title=event.getString("Title");

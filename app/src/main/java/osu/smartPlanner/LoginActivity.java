@@ -32,12 +32,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUserNameField;
     private EditText mPassWordField;
     private CardView mConfirmLogin;
+    private static final String EXTRA_USERNAME="userName";
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        userName=new String();passWord=new String();
         mUserNameField = findViewById(R.id.user_name_edit);
         mUserNameField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -115,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                                 //Log.d("TAG1", "login");
                                 //startActivity(intentToMain);
                                 Intent intent=new Intent(LoginActivity.this,EventListActivity.class);
+                                intent.putExtra(EXTRA_USERNAME,userName);
                                 startActivity(intent);
                                 //Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
                                 //intentToMain.putExtra("USERNAME", userName);

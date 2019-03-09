@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 public class EventListActivity extends SingleFragmentActivity {
     private String userName;
@@ -14,11 +15,13 @@ public class EventListActivity extends SingleFragmentActivity {
     {
         super.onCreate(savedInstanceState);
         userName=getIntent().getStringExtra(EXTRA_USERNAME);
+        Log.e("TAGBOSS","eventlistactivity username is"+userName);
     }
     @Override
     protected Fragment createFragment(){
+        Log.e("TAGBOSS","eventlistactivity in createfragment username is"+userName);
         EventListFragment e=new EventListFragment();
-        e.setUserName("test");
+        e.setUserName(userName);
         return e;
     }
 }
