@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class EventActivity extends AppCompatActivity {
     private EditText titleField;
@@ -16,6 +17,8 @@ public class EventActivity extends AppCompatActivity {
     private EditText locationField;
     private EditText contactsField;
     private EditText priorityField;
+    private TextView buttonName;
+    private boolean update;
     private String username;
     private String title;
     private String description;
@@ -59,6 +62,17 @@ public class EventActivity extends AppCompatActivity {
 
             }
         });
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                update = false;
+            } else {
+                update = extras.getBoolean("USERNAME");
+            }
+        } else {
+            update = (Boolean) savedInstanceState.getSerializable("USERNAME");
+        }
 
         descriptionField = findViewById(R.id.eventDescription);
         descriptionField.addTextChangedListener(new TextWatcher() {
@@ -149,6 +163,13 @@ public class EventActivity extends AppCompatActivity {
 
             }
         });
+
+        buttonName = findViewById(R.id.textAddEvent);
+
+        if (!update) {
+            titleField.setText("hahaha");
+            buttonName.setText("Add");
+        }
 
         confirmAddEvent = findViewById(R.id.addEventButton);
         confirmAddEvent.setOnClickListener(new View.OnClickListener() {
