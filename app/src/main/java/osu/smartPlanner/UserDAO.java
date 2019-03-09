@@ -124,7 +124,7 @@ public class UserDAO {
                             String result = jsonObject.getString("Result");  //注④
                             if (result.equals("success")) {  //注⑤
                                 //做自己的登录成功操作，如页面跳转
-                                Toast.makeText(context,"Success adding a event",Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,"Event updated",Toast.LENGTH_LONG).show();
 
                             } else {
                                 //做自己的登录失败操作，如Toast提示
@@ -207,7 +207,7 @@ public class UserDAO {
                             String result = jsonObject.getString("Result");  //注④
                             if (result.equals("success")) {  //注⑤
                                 //做自己的登录成功操作，如页面跳转
-                                Toast.makeText(context,"Success adding a event",Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,"Event deleted",Toast.LENGTH_LONG).show();
 
                             } else {
                                 //做自己的登录失败操作，如Toast提示

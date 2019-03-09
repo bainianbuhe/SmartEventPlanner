@@ -6,8 +6,8 @@ public class Event {
     private String description;
     private String time;
     private String location;
-    private String priority;
     private String contacts;
+    private String priority;
 
     public void setContacts(String contacts) {
         this.contacts = contacts;

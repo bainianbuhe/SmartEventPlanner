@@ -17,9 +17,11 @@ public class EventActivity extends AppCompatActivity {
     private EditText locationField;
     private EditText contactsField;
     private EditText priorityField;
-    private TextView buttonName;
+    private TextView addButtonName;
+    private TextView deleteButtonName;
     private boolean update;
     private String username;
+    private String originalTitle;
     private String title;
     private String description;
     private String time;
@@ -27,6 +29,7 @@ public class EventActivity extends AppCompatActivity {
     private String contacts;
     private String priority;
     private CardView confirmAddEvent;
+    private CardView confirmDeleteEvent;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -38,12 +41,34 @@ public class EventActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 username = null;
+                title = null;
+                description = null;
+                time = null;
+                location = null;
+                contacts = null;
+                priority = null;
+                update = false;
             } else {
                 username = extras.getString("USERNAME");
+                title = extras.getString("TITLE");
+                description = extras.getString("DESCRIPTION");
+                time = extras.getString("TIME");
+                location = extras.getString("LOCATION");
+                contacts = extras.getString("CONTACTS");
+                priority = extras.getString("PRIORITY");
+                update = extras.getBoolean("UPDATE");
             }
         } else {
             username = (String) savedInstanceState.getSerializable("USERNAME");
+            title = (String) savedInstanceState.getSerializable("TITLE");
+            description = (String) savedInstanceState.getSerializable("DESCRIPTION");
+            location = (String) savedInstanceState.getSerializable("LOCATION");
+            contacts = (String) savedInstanceState.getSerializable("CONTACTS");
+            priority = (String) savedInstanceState.getSerializable("PRIORITY");
+            update = (Boolean) savedInstanceState.getSerializable("UPDATE");
         }
+
+        originalTitle = title;
 
         titleField = findViewById(R.id.eventTittle);
         titleField.addTextChangedListener(new TextWatcher() {
@@ -63,16 +88,7 @@ public class EventActivity extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                update = false;
-            } else {
-                update = extras.getBoolean("USERNAME");
-            }
-        } else {
-            update = (Boolean) savedInstanceState.getSerializable("USERNAME");
-        }
+
 
         descriptionField = findViewById(R.id.eventDescription);
         descriptionField.addTextChangedListener(new TextWatcher() {
@@ -164,12 +180,23 @@ public class EventActivity extends AppCompatActivity {
             }
         });
 
-        buttonName = findViewById(R.id.textAddEvent);
-
-        if (!update) {
-            titleField.setText("hahaha");
-            buttonName.setText("Add");
+        addButtonName = findViewById(R.id.textAddEvent);
+        deleteButtonName = findViewById(R.id.textDeleteEvent);
+        confirmDeleteEvent = findViewById(R.id.deleteEventButton);
+        if (update) {
+            titleField.setText(title);
+            descriptionField.setText(description);
+            timeField.setText(time);
+            locationField.setText(location);
+            contactsField.setText(contacts);
+            priorityField.setText(priority);
+            addButtonName.setText("Update");
+            deleteButtonName.setText("Delete");
+        } else {
+            confirmDeleteEvent.setVisibility(View.GONE);
+            addButtonName.setText("Add");
         }
+
 
         confirmAddEvent = findViewById(R.id.addEventButton);
         confirmAddEvent.setOnClickListener(new View.OnClickListener() {
@@ -183,8 +210,33 @@ public class EventActivity extends AppCompatActivity {
                 event.setLocation(location);
                 event.setContacts(contacts);
                 event.setPriority(priority);
-                UserDAO.addEvent(event,EventActivity.this);
-                Intent intent = new Intent(EventActivity.this, MainActivity.class);
+
+                if (!update) {
+                    UserDAO.addEvent(event, EventActivity.this);
+                } else {
+                    UserDAO.updateEvent(username, originalTitle, event, EventActivity.this);
+                }
+                Intent intent = new Intent(EventActivity.this, EventListActivity.class);
+                intent.putExtra("USERNAME",username);
+                startActivity(intent);
+            }
+        });
+
+        confirmDeleteEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Event event = new Event();
+                event.setUserName(username);
+                event.setTitle(title);
+                event.setDescription(description);
+                event.setTime(time);
+                event.setLocation(location);
+                event.setContacts(contacts);
+                event.setPriority(priority);
+
+                UserDAO.deleteEvent(username, originalTitle, EventActivity.this);
+                Intent intent = new Intent(EventActivity.this, EventListActivity.class);
+                intent.putExtra("USERNAME",username);
                 startActivity(intent);
             }
         });

@@ -90,7 +90,22 @@ public class EventListFragment extends Fragment {
         @Override
         public void onClick(View view)
         {
-            Log.e("TAG5","click!");
+            String title = mEvent.getTitle();
+            String description = mEvent.getDescription();
+            String time = mEvent.getTime();
+            String location = mEvent.getLocation();
+            String contacts = mEvent.getContacts();
+            String priority = mEvent.getPriority();
+            Intent intent = new Intent(view.getContext(), EventActivity.class);
+            intent.putExtra("USERNAME", userName);
+            intent.putExtra("TITLE", title);
+            intent.putExtra("DESCRIPTION", description);
+            intent.putExtra("TIME", time);
+            intent.putExtra("LOCATION", location);
+            intent.putExtra("CONTACTS", contacts);
+            intent.putExtra("PRIORITY", priority);
+            intent.putExtra("UPDATE", true);
+            view.getContext().startActivity(intent);
             //Intent intent =new Intent(getActivity().getApplicationContext(),RequestDetailActivity.class);
             //intent.putExtra(EXTRA_DRIVER_USERNAME,driverUserName);
             //intent.putExtra(EXTRA_PASSENGER_USERNAME,mEvent.getUserName());

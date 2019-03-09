@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         confirmNewEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, EventActivity.class);
-                intent.putExtra("USERNAME", username);
-                startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, EventActivity.class);
+            intent.putExtra("USERNAME", username);
+            startActivity(intent);
             }
         });
     }

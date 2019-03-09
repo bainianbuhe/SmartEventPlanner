@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUserNameField;
     private EditText mPassWordField;
     private CardView mConfirmLogin;
-    private static final String EXTRA_USERNAME="userName";
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -115,26 +114,12 @@ public class LoginActivity extends AppCompatActivity {
                                 //Log.d("TAG1", "login");
                                 //startActivity(intentToMain);
                                 Intent intent=new Intent(LoginActivity.this,EventListActivity.class);
-                                intent.putExtra(EXTRA_USERNAME,userName);
+                                intent.putExtra("USERNAME",userName);
                                 startActivity(intent);
                                 //Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
                                 //intentToMain.putExtra("USERNAME", userName);
                                 //startActivity(intentToMain);
 
-//                                Event event = new Event();
-//                                event.setContacts("6142222222");
-//                                event.setDescription("descr");
-//                                event.setLocation("location");
-//                                event.setPriority("important");
-//                                event.setTime("12.23");
-//                                event.setTitle("title");
-//                                event.setUserName("hygg");
-//                                //UserDAO.addEvent(event,LoginActivity.this);
-//                                event.setTime("36.12");
-//                                UserDAO.updateEvent("hygg","title",event,LoginActivity.this);
-//                                UserDAO.deleteEvent("hygg","title",LoginActivity.this);
-//                                event.setLocation("tianshangrenjian");
-//                                //UserDAO.addEvent(event,LoginActivity.this);
                             } else {
                                 //做自己的登录失败操作，如Toast提示
                                 Toast.makeText(LoginActivity.this,R.string.login_fail,Toast.LENGTH_LONG).show();
