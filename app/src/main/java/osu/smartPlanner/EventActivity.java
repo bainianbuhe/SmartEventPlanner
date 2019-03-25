@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,7 +15,6 @@ public class EventActivity extends AppCompatActivity {
     private EditText titleField;
     private EditText descriptionField;
     private EditText timeField;
-    private EditText locationField;
     private EditText contactsField;
     private EditText priorityField;
     private TextView addButtonName;
@@ -30,7 +30,9 @@ public class EventActivity extends AppCompatActivity {
     private String priority;
     private CardView confirmAddEvent;
     private CardView confirmDeleteEvent;
-
+    private CardView mSelectLocation;
+    private boolean isLocationComplete=false;
+    private static final String TAG="eventactivity";
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -126,21 +128,15 @@ public class EventActivity extends AppCompatActivity {
             }
         });
 
-        locationField = findViewById(R.id.eventLocation);
-        locationField.addTextChangedListener(new TextWatcher() {
+        mSelectLocation=findViewById(R.id.selectLocation);
+        mSelectLocation.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                location = s.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void onClick(View v) {
+                if (!update) {
+                    Log.d(TAG,"click select location");
+                    Intent intent = new Intent(EventActivity.this, SelectLocationActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -187,7 +183,6 @@ public class EventActivity extends AppCompatActivity {
             titleField.setText(title);
             descriptionField.setText(description);
             timeField.setText(time);
-            locationField.setText(location);
             contactsField.setText(contacts);
             priorityField.setText(priority);
             addButtonName.setText("Update");
@@ -202,6 +197,7 @@ public class EventActivity extends AppCompatActivity {
         confirmAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG,"confirm add event");
                 Event event = new Event();
                 event.setUserName(username);
                 event.setTitle(title);
@@ -225,6 +221,7 @@ public class EventActivity extends AppCompatActivity {
         confirmDeleteEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG,"confirm delete event");
                 Event event = new Event();
                 event.setUserName(username);
                 event.setTitle(title);

@@ -22,7 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserDAO {
+    private static final String TAG="UserDAO";
     static public   void addEvent(final Event event, final Context context) {
+        Log.d(TAG,"userdao add event");
         //请求地址
         String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/AddEventServlet";
         String tag = "AddEventServlet"+event.getUserName();    //注②
@@ -104,6 +106,7 @@ public class UserDAO {
         requestQueue.add(request);
     }
     static public   void updateEvent(final String originalUserName, final String originalTitle, final Event event, final Context context) {
+        Log.d(TAG,"userdao update event");
         //请求地址
         String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/UpdateEventServlet";
         String tag = "AddEventServlet"+event.getUserName();    //注②
@@ -187,6 +190,7 @@ public class UserDAO {
         requestQueue.add(request);
     }
     static public   void deleteEvent(final String originalUserName, final String originalTitle, final Context context) {
+        Log.d(TAG,"userdao delete event");
         //请求地址
         String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/DeleteEventServlet";
         String tag = "AddEventServlet"+originalUserName;    //注②
