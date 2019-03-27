@@ -13,9 +13,14 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
+import android.content.Intent;
+
+
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -56,9 +61,18 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_location);
         getLocationPermission();
+        String locationIni = getIntent().getStringExtra("Get_Location");
         mSearchText=(AutoCompleteTextView) findViewById(R.id.input_search);
         mSearchText.setMaxLines(1);
         mSearchText.setInputType(InputType.TYPE_CLASS_TEXT);
+        mSearchText.setText(locationIni);
+    }
+
+    public void buttonOnClick(View v) {
+        EventActivity.isLocationComplete = true;
+        Intent intent= new Intent (SelectLocationActivity.this, EventActivity.class);
+        intent.putExtra("Location_Name",mSearchText.getText().toString());
+        startActivity(intent);
     }
 
     private void getLocationPermission() {

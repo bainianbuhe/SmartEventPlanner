@@ -17,6 +17,7 @@ public class EventActivity extends AppCompatActivity {
     private EditText timeField;
     private EditText contactsField;
     private EditText priorityField;
+    private EditText locationField;
     private TextView addButtonName;
     private TextView deleteButtonName;
     private boolean update;
@@ -31,7 +32,7 @@ public class EventActivity extends AppCompatActivity {
     private CardView confirmAddEvent;
     private CardView confirmDeleteEvent;
     private CardView mSelectLocation;
-    private boolean isLocationComplete=false;
+    public static boolean isLocationComplete=false;
     private static final String TAG="eventactivity";
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -69,6 +70,7 @@ public class EventActivity extends AppCompatActivity {
             priority = (String) savedInstanceState.getSerializable("PRIORITY");
             update = (Boolean) savedInstanceState.getSerializable("UPDATE");
         }
+
 
         originalTitle = title;
 
@@ -128,17 +130,45 @@ public class EventActivity extends AppCompatActivity {
             }
         });
 
+        locationField = findViewById(R.id.eventLocation);
+        locationField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                location = s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        if (!isLocationComplete) {
         mSelectLocation=findViewById(R.id.selectLocation);
         mSelectLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!update) {
+
                     Log.d(TAG,"click select location");
                     Intent intent = new Intent(EventActivity.this, SelectLocationActivity.class);
+                    intent.putExtra("Get_Location",location);
                     startActivity(intent);
+
                 }
             }
-        });
+        });} else {
+            String locationName= getIntent().getStringExtra("Location_Name");
+            locationField.setText(locationName);
+
+
+        }
 
         contactsField = findViewById(R.id.eventContacts);
         contactsField.addTextChangedListener(new TextWatcher() {
