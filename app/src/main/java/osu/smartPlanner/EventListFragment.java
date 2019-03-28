@@ -31,17 +31,29 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Comparator;
 
+
+class sortEventComp implements Comparator<Event> {
+    @Override
+    public int compare(Event e1, Event e2) {
+        if (Integer.valueOf(e1.getPriority()) < Integer.valueOf(e2.getPriority())) return 1;
+        else return -1;
+    }
+}
 
 public class EventListFragment extends Fragment {
     private RecyclerView mRequestRecyclerView;
     private EventAdapter mAdapter;
     private  String userName;
+    private boolean sort;
     public void setUserName(String username) {
         userName = username;
     }
+    public void setSort(boolean pf) {sort = pf;}
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
     {
@@ -52,14 +64,17 @@ public class EventListFragment extends Fragment {
         return view;
 
     }
+
     public void updateUI()
 
     {
         SeeRequestsRequest(new VolleyCallback() {
             @Override
             public void onSuccess(ArrayList<Event> result) {
-                ArrayList<Event> events= result;
-                Log.e("TAG3","updateuilength"+events.size());
+                if (sort) Collections.sort(result, new sortEventComp());
+
+                ArrayList<Event> events = result;
+//                Log.e("TAG3","updateuilength"+events.size());
                 mAdapter=new EventAdapter(events);
                 mRequestRecyclerView.setAdapter(mAdapter);
             }
@@ -114,11 +129,11 @@ public class EventListFragment extends Fragment {
         public void bind(Event event)
         {
             mEvent=event;
-            mTitleTextView.setText("Title:"+mEvent.getTitle());
+            mTitleTextView.setText(mEvent.getTitle());
+            mDescriptionTextView.setText("Description:"+mEvent.getDescription());
             mTimeTextView.setText("Time:"+mEvent.getTime());
             mContactsTextView.setText("Contacts:"+mEvent.getContacts());
             mPriorityTextView.setText("Priority:"+mEvent.getPriority());
-            mDescriptionTextView.setText("Description:"+mEvent.getDescription());
             mLocationTextView.setText("Location:"+mEvent.getLocation());
 
         }
@@ -163,9 +178,6 @@ public class EventListFragment extends Fragment {
                         try {
                             JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");
                             JSONArray events = jsonObject.getJSONArray("Events");
-                            Log.e("TAGBOSS", "kuokuoni");
-                            Log.e("TAGBOSS", "in event list "+events.length()+"requests");
-                            Log.e("TAGBOSS", "length"+events.length());
                             for (int i = 0; i < events.length(); i++) {
                                 JSONObject event = events.getJSONObject(i);    //注②
                                 String title=event.getString("Title");
