@@ -49,11 +49,11 @@ public class EventListFragment extends Fragment {
     private RecyclerView mRequestRecyclerView;
     private EventAdapter mAdapter;
     private  String userName;
-    private boolean sort;
+    private String sortType;
     public void setUserName(String username) {
         userName = username;
     }
-    public void setSort(boolean pf) {sort = pf;}
+    public void setSort(String type) {sortType = type;}
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
     {
@@ -71,8 +71,7 @@ public class EventListFragment extends Fragment {
         SeeRequestsRequest(new VolleyCallback() {
             @Override
             public void onSuccess(ArrayList<Event> result) {
-                if (sort) Collections.sort(result, new sortEventComp());
-
+                if (sortType.equals("priority")) Collections.sort(result, new sortEventComp());
                 ArrayList<Event> events = result;
 //                Log.e("TAG3","updateuilength"+events.size());
                 mAdapter=new EventAdapter(events);

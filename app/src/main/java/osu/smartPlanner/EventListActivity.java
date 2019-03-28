@@ -15,7 +15,6 @@ public class EventListActivity extends SingleFragmentActivity {
     private String userName;
     private CardView confirmNewEvent;
     private CardView confirmSortEvent;
-    private boolean pf = false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -35,9 +34,9 @@ public class EventListActivity extends SingleFragmentActivity {
         confirmSortEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MyApplication) getApplication()).setSortType("priority");
                 finish();
                 startActivity(getIntent());
-                pf = true;
             }
         });
     }
@@ -46,7 +45,7 @@ public class EventListActivity extends SingleFragmentActivity {
     protected Fragment createFragment(){
         EventListFragment e = new EventListFragment();
         e.setUserName(userName);
-        e.setSort(pf);
+        e.setSort(((MyApplication) getApplication()).getSortType());
         return e;
     }
 }
