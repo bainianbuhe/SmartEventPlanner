@@ -4,12 +4,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-    android:layout_marginBottom="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_margin="20dp"
     >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#2196F3"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:id="@+id/title_text"/>
     <TextView
         android:layout_width="match_parent"

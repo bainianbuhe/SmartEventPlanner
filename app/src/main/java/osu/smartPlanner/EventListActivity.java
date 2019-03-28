@@ -9,9 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.support.v7.widget.CardView;
 
+import java.util.Collections;
+
 public class EventListActivity extends SingleFragmentActivity {
     private String userName;
     private CardView confirmNewEvent;
+    private CardView confirmSortEvent;
+    private boolean pf = false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -22,16 +26,27 @@ public class EventListActivity extends SingleFragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EventListActivity.this, EventActivity.class);
-                Log.e("TAG1", userName);
                 intent.putExtra("USERNAME", userName);
                 startActivity(intent);
             }
         });
+
+        confirmSortEvent = findViewById(R.id.sortEventButton);
+        confirmSortEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(getIntent());
+                pf = true;
+            }
+        });
     }
+
     @Override
     protected Fragment createFragment(){
         EventListFragment e = new EventListFragment();
         e.setUserName(userName);
+        e.setSort(pf);
         return e;
     }
 }
