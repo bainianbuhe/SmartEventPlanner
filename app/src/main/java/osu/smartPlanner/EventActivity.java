@@ -9,14 +9,19 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import java.util.List;
+import java.util.ArrayList;
 
 public class EventActivity extends AppCompatActivity {
     private EditText titleField;
     private EditText descriptionField;
     private EditText timeField;
     private EditText contactsField;
-    private EditText priorityField;
+    private Spinner priorityField;
+//    private EditText priorityField;
     private EditText locationField;
     private TextView addButtonName;
     private TextView deleteButtonName;
@@ -39,6 +44,7 @@ public class EventActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
+        addItemsOnPriority();
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -189,22 +195,6 @@ public class EventActivity extends AppCompatActivity {
         });
 
         priorityField = findViewById(R.id.eventPriority);
-        priorityField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                priority = s.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         addButtonName = findViewById(R.id.textAddEvent);
         deleteButtonName = findViewById(R.id.textDeleteEvent);
@@ -214,7 +204,6 @@ public class EventActivity extends AppCompatActivity {
             descriptionField.setText(description);
             timeField.setText(time);
             contactsField.setText(contacts);
-            priorityField.setText(priority);
             addButtonName.setText("Update");
             deleteButtonName.setText("Delete");
         } else {
@@ -227,6 +216,19 @@ public class EventActivity extends AppCompatActivity {
         confirmAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                switch(String.valueOf(priorityField.getSelectedItem())) {
+                    case "High":
+                        priority = "3";
+                        break;
+                    case "Regular":
+                        priority = "2";
+                        break;
+                    case "Low":
+                        priority = "1";
+                        break;
+                    default:
+                        priority = "1";
+                }
                 Log.d(TAG,"confirm add event");
                 Event event = new Event();
                 event.setUserName(username);
@@ -268,6 +270,20 @@ public class EventActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void addItemsOnPriority() {
+
+        priorityField = (Spinner) findViewById(R.id.eventPriority);
+        List<String> list = new ArrayList<String>();
+        list.add("High");
+        list.add("Regular");
+        list.add("Low");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        priorityField.setAdapter(dataAdapter);
+    }
+
 }
 
 
