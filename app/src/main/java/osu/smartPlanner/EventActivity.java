@@ -147,7 +147,8 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 location = s.toString();
-                ((MyApplication) getApplication()).setLocation(location);
+                //((MyApplication) getApplication()).setLocation(location);
+
             }
 
             @Override
@@ -168,23 +169,20 @@ public class EventActivity extends AppCompatActivity {
 
                     Log.d(TAG,"click select location");
                     Intent intent = new Intent(EventActivity.this, SelectLocationActivity.class);
-                    //intent.putExtra("Get_Location",location);
+                    intent.putExtra("Get_Location",location);
 
                     startActivity(intent);
 
                 }
             }
         });} else {
-            String s = ((MyApplication) getApplication()).getLocation();
-            locationField.setText(s);
+            //String s = ((MyApplication) getApplication()).getLocation();
+            location = getIntent().getStringExtra("LOCATION");
+            locationField.setText(location);
             username=((MyApplication) getApplication()).getUsername();
 
-            location=s;
+
         }
-
-
-
-
 
 
         contactsField = findViewById(R.id.eventContacts);
@@ -214,6 +212,7 @@ public class EventActivity extends AppCompatActivity {
             titleField.setText(title);
             descriptionField.setText(description);
             timeField.setText(time);
+            locationField.setText(location);
             contactsField.setText(contacts);
             addButtonName.setText("Update");
             deleteButtonName.setText("Delete");
@@ -246,6 +245,7 @@ public class EventActivity extends AppCompatActivity {
                 event.setTitle(title);
                 event.setDescription(description);
                 event.setTime(time);
+
                 event.setLocation(location);
                 event.setContacts(contacts);
                 event.setPriority(priority);
