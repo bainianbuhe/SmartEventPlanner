@@ -72,8 +72,9 @@ public class EventListFragment extends Fragment {
             @Override
             public void onSuccess(ArrayList<Event> result) {
                 if (sortType.equals("priority")) Collections.sort(result, new sortEventComp());
+                else if (sortType.equals("distance")) Collections.sort(result, new sortEventComp());
                 ArrayList<Event> events = result;
-//                Log.e("TAG3","updateuilength"+events.size());
+
                 mAdapter=new EventAdapter(events);
                 mRequestRecyclerView.setAdapter(mAdapter);
             }

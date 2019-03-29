@@ -14,7 +14,9 @@ import java.util.Collections;
 public class EventListActivity extends SingleFragmentActivity {
     private String userName;
     private CardView confirmNewEvent;
-    private CardView confirmSortEvent;
+    private CardView confirmSortDistance;
+    private CardView confirmSortPriority;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -30,8 +32,19 @@ public class EventListActivity extends SingleFragmentActivity {
             }
         });
 
-        confirmSortEvent = findViewById(R.id.sortEventButton);
-        confirmSortEvent.setOnClickListener(new View.OnClickListener() {
+
+        confirmSortDistance = findViewById(R.id.sortDistanceButton);
+        confirmSortDistance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MyApplication) getApplication()).setSortType("distance");
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+        confirmSortPriority = findViewById(R.id.sortPriorityButton);
+        confirmSortPriority.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((MyApplication) getApplication()).setSortType("priority");

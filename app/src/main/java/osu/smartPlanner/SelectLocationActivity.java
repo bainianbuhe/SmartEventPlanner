@@ -55,6 +55,12 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
     JSONObject locationJSONObject;
     //widgets
     private AutoCompleteTextView mSearchText;
+    private double latitudeCur;
+    private double latitudeDes;
+
+    private double longitudeCur;
+    private double longitudeDes;
+    private double dis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,9 +142,9 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
                         if(task.isSuccessful()&&task.getResult()!=null){
                             Location currentLocation = (Location) task.getResult();
                                 moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                        DEFAULT_ZOOM,
-                                        "My Location");
-
+                                        DEFAULT_ZOOM, "My Location");
+                                latitudeCur = currentLocation.getLatitude();
+                                longitudeCur = currentLocation.getLongitude();
                         }else{
                             Toast.makeText(SelectLocationActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
@@ -222,6 +228,8 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
                    double lat = locationJSONObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lat");
                    double lng = locationJSONObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lng");
                    moveCamera(new LatLng(lat, lng),DEFAULT_ZOOM, title);
+                   dis = distance(longitudeCur, latitudeCur, lng, lat, "M");
+                   ((MyApplication) getApplication()).setDistance(dis);
                }
                catch (JSONException e)
                {}
@@ -238,6 +246,25 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    private static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
+        if ((lat1 == lat2) && (lon1 == lon2)) {
+            return 0;
+        }
+        else {
+            double theta = lon1 - lon2;
+            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
+            dist = Math.acos(dist);
+            dist = Math.toDegrees(dist);
+            dist = dist * 60 * 1.1515;
+            if (unit == "K") {
+                dist = dist * 1.609344;
+            } else if (unit == "N") {
+                dist = dist * 0.8684;
+            }
+            return (dist);
+        }
     }
 }
 
