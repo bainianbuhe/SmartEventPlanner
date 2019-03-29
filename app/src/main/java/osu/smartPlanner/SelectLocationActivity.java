@@ -61,17 +61,24 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_location);
         getLocationPermission();
-        String locationIni = getIntent().getStringExtra("Get_Location");
+        String s = ((MyApplication) getApplication()).getLocation();
+        Log.d(TAG,s);
+        System.out.println(s);
+        //String locationIni = getIntent().getStringExtra("Get_Location");
         mSearchText=(AutoCompleteTextView) findViewById(R.id.input_search);
         mSearchText.setMaxLines(1);
         mSearchText.setInputType(InputType.TYPE_CLASS_TEXT);
-        mSearchText.setText(locationIni);
+        mSearchText.setText(s);
     }
+
+
 
     public void buttonOnClick(View v) {
         EventActivity.isLocationComplete = true;
+
         Intent intent= new Intent (SelectLocationActivity.this, EventActivity.class);
-        intent.putExtra("Location_Name",mSearchText.getText().toString());
+        ((MyApplication) getApplication()).setLocation(mSearchText.getText().toString());
+        //intent.putExtra("Location_Name",mSearchText.getText().toString());
         startActivity(intent);
     }
 

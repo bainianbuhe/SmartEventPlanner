@@ -147,6 +147,7 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 location = s.toString();
+                ((MyApplication) getApplication()).setLocation(location);
             }
 
             @Override
@@ -155,6 +156,8 @@ public class EventActivity extends AppCompatActivity {
             }
         });
 
+
+
         if (!isLocationComplete) {
         mSelectLocation=findViewById(R.id.selectLocation);
         mSelectLocation.setOnClickListener(new View.OnClickListener() {
@@ -162,19 +165,27 @@ public class EventActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!update) {
 
+
                     Log.d(TAG,"click select location");
                     Intent intent = new Intent(EventActivity.this, SelectLocationActivity.class);
-                    intent.putExtra("Get_Location",location);
+                    //intent.putExtra("Get_Location",location);
+
                     startActivity(intent);
 
                 }
             }
         });} else {
-            String locationName= getIntent().getStringExtra("Location_Name");
-            locationField.setText(locationName);
+            String s = ((MyApplication) getApplication()).getLocation();
+            locationField.setText(s);
+            username=((MyApplication) getApplication()).getUsername();
 
-
+            location=s;
         }
+
+
+
+
+
 
         contactsField = findViewById(R.id.eventContacts);
         contactsField.addTextChangedListener(new TextWatcher() {

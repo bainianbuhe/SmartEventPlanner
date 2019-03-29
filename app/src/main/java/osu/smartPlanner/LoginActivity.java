@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 userName=s.toString();
-
+                ((MyApplication) getApplication()).setUsername(userName);
             }
 
             @Override
@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
         mPassWordField = findViewById(R.id.pass_word_edit);
         mPassWordField.addTextChangedListener(new TextWatcher() {
             @Override

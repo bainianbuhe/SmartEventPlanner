@@ -241,6 +241,7 @@ public class EventListFragment extends Fragment {
         };
 
 
+
         //设置Tag标签
         request.setTag(tag);
 
