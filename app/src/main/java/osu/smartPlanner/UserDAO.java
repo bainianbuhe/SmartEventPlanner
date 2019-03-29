@@ -26,7 +26,7 @@ public class UserDAO {
     static public   void addEvent(final Event event, final Context context) {
         Log.d(TAG,"userdao add event");
         //请求地址
-        String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/AddEventServlet";
+        String url =  "http://13.68.221.218:8080/SmartEventPlanner/AddEventServlet";
         String tag = "AddEventServlet"+event.getUserName();    //注②
 
         //取得请求队列
@@ -86,7 +86,7 @@ public class UserDAO {
         }) {
             @Override
             protected Map<String, String> getParams()  {
-               // Log.e("tag","username in addrequest is "+userName);
+                // Log.e("tag","username in addrequest is "+userName);
                 Map<String, String> params = new HashMap<>();
                 params.put("userName", event.getUserName());
                 params.put("contacts",  event.getContacts());
@@ -108,7 +108,7 @@ public class UserDAO {
     static public   void updateEvent(final String originalUserName, final String originalTitle, final Event event, final Context context) {
         Log.d(TAG,"userdao update event");
         //请求地址
-        String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/UpdateEventServlet";
+        String url = "http://13.68.221.218:8080/SmartEventPlanner/UpdateEventServlet";
         String tag = "AddEventServlet"+event.getUserName();    //注②
 
         //取得请求队列
@@ -192,7 +192,7 @@ public class UserDAO {
     static public   void deleteEvent(final String originalUserName, final String originalTitle, final Context context) {
         Log.d(TAG,"userdao delete event");
         //请求地址
-        String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/DeleteEventServlet";
+        String url = "http://13.68.221.218:8080/SmartEventPlanner/DeleteEventServlet";
         String tag = "AddEventServlet"+originalUserName;    //注②
 
         //取得请求队列

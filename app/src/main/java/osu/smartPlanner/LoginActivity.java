@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void LoginRequest(final String accountNumber, final String password) {
         //请求地址
-        String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/LoginServlet";
+        String url = "http://13.68.221.218:8080/SmartEventPlanner/LoginServlet";
         //String url = "http://127.0.0.1:4040/Carlift_Hanyin/LoginServlet";  //注①
         String tag = "LoginServlet"+userName;    //注②
 

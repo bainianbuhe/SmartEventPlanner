@@ -163,7 +163,7 @@ public class EventListFragment extends Fragment {
     public void SeeRequestsRequest(final VolleyCallback callback) {
         //请求地址
         final ArrayList<Event> eventobjects=new ArrayList<>();
-        String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/QueryEventsServlet";
+        String url =  "http://13.68.221.218:8080/SmartEventPlanner/QueryEventsServlet";
         String tag = "SeeRequestServlet"+userName;    //注②
         //取得请求队列
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
