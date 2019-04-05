@@ -36,8 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Comparator;
 
-
-class sortEventComp implements Comparator<Event> {
+ class sortEventComp implements Comparator<Event> {
     @Override
     public int compare(Event e1, Event e2) {
         if (Integer.valueOf(e1.getPriority()) < Integer.valueOf(e2.getPriority())) return 1;

@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,8 +81,9 @@ public class SignupActivity extends AppCompatActivity {
         mConfirmSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignupRequest(userName,passWord);
-
+                try{SignupRequest(userName,Encrypyt.encrypt_Base64(passWord));}
+                catch(java.lang.Exception e)
+                {Log.e("signupactivity",e.toString());}
             }
         });
 
@@ -89,7 +91,7 @@ public class SignupActivity extends AppCompatActivity {
 
     public   void SignupRequest(final String accountNumber, final String password) {
         //请求地址
-        String url = "http://www.hygg.com.ngrok.io/SmartEventPlanner/SignupServlet";
+        String url = "http://13.68.221.218:8080/SmartEventPlanner/SignupServlet";
         String tag = "SignupServlet"+userName;    //注②
 
         //取得请求队列

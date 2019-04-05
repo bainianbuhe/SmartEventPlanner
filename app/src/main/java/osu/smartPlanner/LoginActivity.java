@@ -79,12 +79,15 @@ public class LoginActivity extends AppCompatActivity {
         mConfirmLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginRequest(userName,passWord);
+                try{
+                LoginRequest(userName,Encrypyt.encrypt_Base64(passWord));}
+                catch(java.lang.Exception e)
+                {}
             }
         });
 
     }
-    public void LoginRequest(final String accountNumber, final String password) {
+    public void LoginRequest(final String accountNumber, final String  password) {
         //请求地址
         String url = "http://13.68.221.218:8080/SmartEventPlanner/LoginServlet";
         //String url = "http://127.0.0.1:4040/Carlift_Hanyin/LoginServlet";  //注①
