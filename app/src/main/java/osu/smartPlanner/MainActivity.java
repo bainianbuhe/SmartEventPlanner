@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         confirmNewEvent = findViewById(R.id.newEventButton);
+
         confirmNewEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
